@@ -1,0 +1,30 @@
+#!/bin/bash
+# This script will setup folder structure for Kubernets\Flux
+# Run this script in directory where you want project. Setup is done in Monorepo structure
+
+# Ask for project name
+read -p "Please enter project name: " Project_Name
+echo "$Project_Name"
+mkdir $Project_Name
+
+Folder_Names=("apps" "infrastructure" "clusters" "monitoring")
+
+# Create fist main folder of project
+for arr in "${Folder_Names[@]}"; do
+	echo $arr
+	mkdir -p $Project_Name/$arr
+ done
+
+# Create sub directories
+Sub_Folders=("base" "production" "staging")
+for sub in "${Sub_Folders[@]}"; do
+	mkdir -p $Project_Name/${Folder_Names[0]}/$sub
+	mkdir -p $Project_Name/${Folder_Names[1]}/$sub
+	mkdir -p $Project_Name/${Folder_Names[2]}/$sub
+	mkdir -p $Project_Name/${Folder_Names[3]}/$sub
+ done
+
+ # Remove base folder from clusters directory
+ rm -r $Project_Name/clusters/base
+echo "Folder structure has been created"
+
