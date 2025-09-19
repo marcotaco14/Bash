@@ -1,0 +1,36 @@
+# Script to get implament systems settings, program and updates
+# Update system
+sudo apt update
+sudp apt upgrade
+
+# Install programs for DevOps usage
+sudo apt install code --classic # Visual Studio Code
+wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+sudo dpkg -i google-chrome-stable_current_amd64.deb
+sudo apt --fix-broken install # Google Chrome
+sudo apt install vim -y # VIM install
+sudo apt install tree # Tree file view install
+sudo apt install git # Git
+sudo apt install openssh-server
+sudo systemctl enable --now ssh
+sudo ufw allow ssh
+sudo ufw enable
+# Set dark theme for system
+gsettings set org.gnome.desktop.interface gtk-theme "Yaru-dark"
+# Set clock to 12HR format
+gsettings set org.gnome.desktop.interface clock-format '12h'
+# Set theme to dark mode
+gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+# Auto hide dock
+gsettings set org.gnome.shell.extensions.dash-to-dock autohide true
+# Setup folders in user documents
+username=$(whoami)
+cd ~
+cd Documents/
+mkdir Github
+mkdir Notes
+mkdir Backup
+
+# Create non root user for daily use
+adduser userland
+usermod -aG sudo userland
